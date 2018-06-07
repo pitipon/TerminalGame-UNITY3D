@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class Hacker : MonoBehaviour {
 
-    int level;
+    // Game configuration data
+    string[] level1Passwords = { "books", "aisle", "self", "password", "font", "borrow" };
+    string[] level2Passwords = { "salmon", "group", "cream", "sushi", "unity", "meimei" };
+
+    // Game state
+    public int level, randomIndex;
+    public string password;
     enum Screen { MainMenu, Password, Win };
     Screen currentScreen;
 
@@ -52,9 +56,9 @@ public class Hacker : MonoBehaviour {
 
     void CheckPassword(string input)
     {
-        if (input == "salmon"){
+        if (input == password){
             currentScreen = Screen.Win;
-            Terminal.WriteLine("Welcome to Salmon Game");
+            Terminal.WriteLine("Well Done!");
         } else {
             Terminal.WriteLine("Incorrect Password");
         }
@@ -62,14 +66,17 @@ public class Hacker : MonoBehaviour {
 
     void RunMainMenu(string input)
     {
-        if (input == "007")
+        bool isValidLevelNumber = (input == "1" || input == "2");
+        if (isValidLevelNumber) 
+        {
+            level = int.Parse(input);
+            //password = level1Passwords[2];
+            StartGame();
+        }
+
+        else if (input == "007")
         {
             Terminal.WriteLine("Hi Mr.bond ..");
-        }
-        else if (input == "1" || input == "2")
-        {
-            level = Int32.Parse(input);
-            StartGame();
         }
         else if (input == "clear")
         {
@@ -84,7 +91,21 @@ public class Hacker : MonoBehaviour {
     void StartGame()
     {
         currentScreen = Screen.Password;
-        Terminal.WriteLine("You have chosen level " + level);
+        Terminal.ClearScreen();
+        switch(level)
+        {
+            case 1:
+                randomIndex = Random.Range(0, level1Passwords.Length);
+                password = level1Passwords[randomIndex];
+                break;
+            case 2:
+                randomIndex = Random.Range(0, level2Passwords.Length);
+                password = level2Passwords[randomIndex];
+                break;
+            default:
+                Debug.LogError("Invalid Level Number");
+                break;
+        }
         Terminal.WriteLine("Enter passoword >");
     }
 }
