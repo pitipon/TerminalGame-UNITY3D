@@ -2,7 +2,7 @@
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Hacker.cs">
     <Files>
-      <File FileName="Assets/Hacker.cs" Line="55" Column="40" />
+      <File FileName="Assets/Hacker.cs" Line="7" Column="61" />
       <File FileName="Assets/WM2000/Utility.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
